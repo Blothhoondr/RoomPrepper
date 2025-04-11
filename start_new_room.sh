@@ -117,7 +117,7 @@ exit 0
 fi
 
 sudo apt install masscan -y
-sudo masscan -p1-65535 $IP > ports
+sudo masscan -p1-65535 --max-rate=10000 $IP > ports
 ports=$(cat ports | awk -F " " '{print $4}' | awk -F "/" '{print $1}' | sort -n | tr '\n' ',' | sed 's/,$//')
 nmap -Pn -sVC -p$ports $IP -v -T5  -oA $BOXDIR_GLOBAL/nmap/initial
 
