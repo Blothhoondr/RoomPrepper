@@ -265,7 +265,7 @@ f_OpenNotes()
     echo -e "${GREEN}FINISHED! Opening notes${NC}"
 
 sleep 4
-nano $BOXDIR_GLOBAL/notes.md
+subl $BOXDIR_GLOBAL/notes.md
 }
 
 #
