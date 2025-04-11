@@ -42,7 +42,7 @@ if [ ! -d "$PLATFORMDIR" ]; then
   mkdir $PLATFORMDIR
 fi
 
-read -p 'Enter the name of the machine (e.g. HackPark): ' HOST
+read -p 'Enter the name of the machine with no spaces (e.g. HackPark): ' HOST
 BOXDIR_GLOBAL=~/$PLATFORM/$HOST
 
 read -p 'Type in the IP address for the machine (e.g. 10.11.12.3): ' IP
@@ -101,7 +101,7 @@ f_NmapDefault(){
 
 echo -e "\n"
 echo -e "${YELLOW}--------------------------------${NC}"
-echo -e "${YELLOW}-  Starting standard Nmap Scan -${NC}"
+echo -e "${YELLOW}-      Starting port Scan      -${NC}"
 echo -e "${YELLOW}--------------------------------${NC}"
 echo -e "\n"
 
@@ -116,8 +116,10 @@ echo -e "\n"
 exit 0
 fi
 
-
-nmap -sCV $IP -v -T5  -oA $BOXDIR_GLOBAL/nmap/initial
+sudo apt install masscan -y
+sudo masscan -p1-65535 $IP > ports
+ports=$(cat ports | awk -F " " '{print $4}' | awk -F "/" '{print $1}' | sort -n | tr '\n' ',' | sed 's/,$//')
+nmap -Pn -sVC -p$ports $IP -v -T5  -oA $BOXDIR_GLOBAL/nmap/initial
 
 
 }
