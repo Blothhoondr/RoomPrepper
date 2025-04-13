@@ -37,13 +37,13 @@ while [ ! -f platform.txt ]; do
 done
 
 PLATFORM=$(cat platform.txt)
-PLATFORMDIR=~/$PLATFORM
+PLATFORMDIR=~/MEGA/$PLATFORM
 if [ ! -d "$PLATFORMDIR" ]; then
   mkdir $PLATFORMDIR
 fi
 
 read -p 'Enter the name of the machine with no spaces (e.g. HackPark): ' HOST
-BOXDIR_GLOBAL=~/$PLATFORM/$HOST
+BOXDIR_GLOBAL=~/MEGA/$PLATFORM/$HOST
 
 read -p 'Type in the IP address for the machine (e.g. 10.11.12.3): ' IP
 
