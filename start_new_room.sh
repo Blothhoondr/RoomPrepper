@@ -116,7 +116,6 @@ echo -e "\n"
 exit 0
 fi
 
-sudo rm ~/MEGA/ports
 sudo apt install masscan -y
 sudo masscan -p1-65535 --max-rate=10000 $IP > $BOXDIR_GLOBAL/nmap/ports
 ports=$(cat $BOXDIR_GLOBAL/nmap/ports | awk -F " " '{print $4}' | awk -F "/" '{print $1}' | sort -n | tr '\n' ',' | sed 's/,$//')
